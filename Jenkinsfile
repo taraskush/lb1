@@ -28,7 +28,7 @@ pipeline {
         stage('Stop running container') {
             steps {
                 script {
-                    def containerId = sh(script: "docker ps -q -f 'ancestor=tauruss/prikm' -f 'publish=80'", returnStdout: true).trim()
+                    def containerId = sh(script: "docker ps -q -f 'publish=80'", returnStdout: true).trim()
                     if (containerId) {
                         echo "Stopping running container on port 80: $containerId"
                         sh "docker stop $containerId"

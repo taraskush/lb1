@@ -23,10 +23,10 @@ PROJECT: ${params.PROJECT}
             }
         }
 
-        stage('Publish HTML') {
-            steps {
-                publishHTML (target : [
-                    allowMissing: true,
+        post {
+            success {
+                    publishHTML (target : [
+                    allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'reports',

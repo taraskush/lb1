@@ -25,10 +25,14 @@ PROJECT: ${params.PROJECT}
 
         stage('Publish HTML') {
             steps {
-                publishHTML(target: [
-                    reportName: 'Test Report',
+                publishHTML (target : [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
                     reportDir: 'lab3.3',
-                    reportFiles: 'report.html'
+                    reportFiles: 'index.html',
+                    reportName: 'Lab_3.3',
+                    reportTitles: 'The Report'
                 ])
             }
         }

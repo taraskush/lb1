@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     ansiColor('xterm') {
-                        echo "This is a colorful output"
+                        echo "\u001B[32mThis is a green colored text\u001B[0m"
                     }
                 }
             }

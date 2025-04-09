@@ -29,7 +29,7 @@ PROJECT: ${params.PROJECT}
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'lab3.3',
+                    reportDir: 'reports',
                     reportFiles: 'index.html',
                     reportName: 'Lab_3.3',
                     reportTitles: 'The Report'

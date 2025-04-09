@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo '\033[34m${params.ENV}\033[0m \033[33m${params.PROJECT}\033[0m'
+                echo "\033[34m${params.ENV}\033[0m \033[33m${params.PROJECT}\033[0m"
             }
         }
     }

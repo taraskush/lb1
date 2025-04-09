@@ -1,47 +1,27 @@
 pipeline {
     agent any
     
+    parameters {
+        string(name: 'ENV', defaultValue: 'dev', description: 'Environment')
+        string(name: 'PROJECT', defaultValue: 'app', description: 'Project')
+    }
+
     stages {
         stage('Start') {
             steps {
                 echo 'Lab_2: started by GitHub'
             }
         }
-        
-        stage('Image build') {
-            steps {
-                sh "docker build -t prikm:latest ."
-                sh "docker tag prikm tauruss/prikm:latest"
-                sh "docker tag prikm tauruss/prikm:$BUILD_NUMBER"
-            }
-        }
-        
-        stage('Push to registry') {
-            steps {
-                withDockerRegistry([credentialsId: "dh_token", url: ""]) {
-                    sh "docker push tauruss/prikm:latest"
-                    sh "docker push tauruss/prikm:$BUILD_NUMBER"
-                }
-            }
-        }
 
-        stage('Stop running container') {
+        stage('Send Notification') {
             steps {
-                script {
-                    def containerId = sh(script: "docker ps -q -f 'publish=80'", returnStdout: true).trim()
-                    if (containerId) {
-                        echo "Stopping running container on port 80: $containerId"
-                        sh "docker stop $containerId"
-                    } else {
-                        echo "No container running on port 80"
+                office365ConnectorSend message: """
+                    {
+                        "text": "Received parameters:\n
+                                ENV: ${params.ENV}\n
+                                PROJECT: ${params.PROJECT}"
                     }
-                }
-            }
-        }
-        
-        stage('Deploy image') {
-            steps {
-                sh "docker run -d -p 80:80 tauruss/prikm"
+                """, webhookUrl: 'https://lpnu.webhook.office.com/webhookb2/0fd33370-9359-484e-b03a-237599a1a48e@7631cd62-5187-4e15-8b8e-ef653e366e7a/JenkinsCI/87977c05380247ff8ff305667672cbc9/80b3d679-e4be-4f50-b87f-820e8a770890/V2vjKJlWSSWP8TT1u0-_4fcHtPCTxsjH5N6X_jlSsKuj81'
             }
         }
     }

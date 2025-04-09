@@ -26,7 +26,7 @@ PROJECT: ${params.PROJECT}
         stage('Publish HTML') {
             steps {
                 publishHTML (target : [
-                    allowMissing: false,
+                    allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'reports',

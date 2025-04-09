@@ -1,25 +1,12 @@
 pipeline {
     agent any
-    
-    parameters {
-        string(name: 'ENV', defaultValue: 'dev', description: 'Environment')
-        string(name: 'PROJECT', defaultValue: 'app', description: 'Project')
+    options {
+        ansiColor('xterm')
     }
-
     stages {
-        stage('Start') {
+        stage('Build') {
             steps {
-                echo 'Lab_2: started by GitHub'
-            }
-        }
-
-        stage('Example') {
-            steps {
-                script {
-                    ansiColor('xterm') {
-                        echo "\u001B[32mThis is a green colored text\u001B[0m"
-                    }
-                }
+                echo '\033[34mHello\033[0m \033[33mcolorful\033[0m \033[35mworld!\033[0m'
             }
         }
     }

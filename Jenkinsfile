@@ -27,7 +27,7 @@ PROJECT: ${params.PROJECT}
             steps {
                 publishHTML(target: [
                     reportName: 'Test Report',
-                    reportDir: 'target',
+                    reportDir: 'lab3.3',
                     reportFiles: 'index.html'
                 ])
             }
